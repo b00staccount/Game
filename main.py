@@ -1,1 +1,1 @@
-print("susy baka)
+print("susy baka")
