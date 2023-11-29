@@ -1,6 +1,7 @@
 import pygame
 import os
 import time
+import math
 
 # Инициализация pygame
 pygame.init()
@@ -36,7 +37,7 @@ car_y = 300
 car_speed = 2
 
 # Определение скорости передвижения машины по горизонтали
-car_move_speed = 2
+car_move_speed = 2.8
 
 # Определение флага для цикла игры
 running = True
@@ -61,16 +62,16 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
+        keys = pygame.key.get_pressed()
         # Проверка нажатий клавиш
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
                 accelerate = True
-                car_speed += 3
+                car_speed += 0.4
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_w:
                 accelerate = False
-                car_speed += 3
+                car_speed += 0.4
         if event.type == pygame.K_LEFT:
             if event.key == pygame.K_l:
                 car_img = pygame.image.load(os.path.join('../../Downloads/car_left.png'))
@@ -83,15 +84,11 @@ while running:
             else:
                 car_img = pygame.image.load(os.path.join('../../Downloads/car.png'))
 
-
-    # Обновление позиции дороги
-    # if accelerate:
-    #     road_counter = car_speed * 2
-    # else:
-    #     road_counter = car_speed
     print(car_speed)
-    if car_speed > 1:
-        car_speed -= 0.2
+    if car_speed > 2.5:
+        car_speed -= 0.03
+        if car_speed >= 8.5:               #############config
+            car_speed = 8.5
     road_counter -= car_speed
 
     # Если дорога достигла нижнего края окна, сбрасываем счетчик
@@ -148,5 +145,5 @@ while running:
     # Обновление окна
     pygame.display.flip()
 
-# Завершение работы pygame
 pygame.quit()
+
